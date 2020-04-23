@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 ## Data visualization 
-df = pd.read_csv("fraud_data.csv")
+df = pd.read_csv("dataset/fraud_data.csv")
 df.head()
 df.info()
 

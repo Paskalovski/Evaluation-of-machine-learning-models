@@ -3,30 +3,30 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model_selection import train_test_split
-
-## The target is stored in the class column, where a value of 1 corresponds to an instance of fraud and 0 corresponds to an instance of not fraud
+## Data visualization 
 df = pd.read_csv("fraud_data.csv")
-# print(df)
+df.head()
+df.info()
+
 fraud = df['Class']
+fraud.head()
 
-
-## percentage of the fraud instances in the dataset
+# Fraud data percentage
 def fraud_percent():
     fraud = df['Class']
     return sum(fraud)/len(fraud)
-# fraud_percent()
+fraud_percent()
 
-
-## Train test split of the dataset
-
+## Data preprocessing 
+# Defining the training and testing data 
+from sklearn.model_selection import train_test_split
 X = df.iloc[:,:-1]
 y = df.iloc[:,-1]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 
-## using the dummy classifier to classify the dataset and calculating the accuracy score and the recall score
+## Using the dummy classifier to classify the dataset and calculating the accuracy and recall score
 
 def dummy_classifier():
     from sklearn.dummy import DummyClassifier
@@ -36,10 +36,10 @@ def dummy_classifier():
     accuracy_score = dummy.score(X_test,y_test)
     recall_score = recall_score(y_test,y_predict)
     return (accuracy_score,recall_score)
-# dummy_classifier()
+dummy_classifier()
 
 
-## using the SVC classifier to classify the dataset and calculating the accuracy score, recall score and precision score
+## Using the SVC classifier to classify the dataset and calculating the accuracy, recall, and precision score
 
 def svc_classifier():
     from sklearn.metrics import recall_score, precision_score, accuracy_score
@@ -49,10 +49,10 @@ def svc_classifier():
     svm_predicted_mc = svm.predict(X_test)
 
     return accuracy_score(y_test, svm_predicted_mc), recall_score(y_test, svm_predicted_mc), precision_score(y_test, svm_predicted_mc)
-# svc_classifier()
+svc_classifier()
 
 
-## using the SVC classifier to classify the dataset with parameters {'C': 1e9, 'gamma': 1e-07} and analyzing the confusion matrix
+## Using the SVC classifier (with tunned parameters) to classify the dataset and calculating the confusion matrix
 
 def confussion_matrix():
     from sklearn.metrics import confusion_matrix
@@ -63,11 +63,11 @@ def confussion_matrix():
     confusion_mc = confusion_matrix(y_test, svm_predicted_mc)
 
     return confusion_mc
-# confussion_matrix()
+confussion_matrix()
 
 
 ## Using the Logistic regression classifier to classify the dataset
-## Analyzing the precision recall curve and the ROC curve
+## Analyzing the precision recall and ROC curve
 
 def log_regression():
     from sklearn.linear_model import LogisticRegression
@@ -103,15 +103,13 @@ def log_regression():
     plt.legend(loc='lower right', fontsize=13)
     plt.plot([0, 1], [0, 1], color='navy', lw=3, linestyle='--')
     plt.axes().set_aspect('equal')
-    # plt.show()
-
+    
     return plt.show()
 
-# log_regression()
+log_regression()
 
 
-## performing a grid search over the defined parameters for a logistic regression and using recall for scoring and the default 3-fold cross validation
-
+## Performing a grid search over the defined parameters for a logistic regression and using recall for scoring and the default 3-fold cross validation
 def grid_search():
     from sklearn.model_selection import GridSearchCV
     from sklearn.linear_model import LogisticRegression
@@ -125,11 +123,11 @@ def grid_search():
                      range(0, len(grid_clf_rec.cv_results_['mean_test_score']), 2)])
 
 
-## Graphical presentation 
+# Graphical presentation 
 def GridSearch_Heatmap(scores):
    plt.figure()
    sns.heatmap(scores.reshape(5,2), xticklabels=['l1','l2'], yticklabels=[0.01, 0.1, 1, 10, 100])
    plt.yticks(rotation=0);
    plt.show()
 
-# GridSearch_Heatmap(grid_search())
+GridSearch_Heatmap(grid_search())

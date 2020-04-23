@@ -2,12 +2,14 @@
 
 Evaluation of several applied machine learning models for fraud prediction
 
-Application content:
-- reading and analyzing the dataset
-- calculating the percentage of the fraud instances in the dataset
-- using the dummy classifier to classify the dataset and calculating the accuracy score and the recall score 
-- using the SVC classifier to classify the dataset and calculating the accuracy score, recall score and precision score 
-- using the SVC classifier to classify the dataset with parameters {'C': 1e9, 'gamma': 1e-07} and analyzing the confusion matrix
-- using the logistic regression classifier to classify the dataset and analyzing the precision recall curve and the ROC curve
-- performing a grid search over the defined parameters for a logistic regression and using recall for scoring and the default 3-fold cross validation
+### Application content:
+- Data Visualization 
+- Data Preprocessing
+- Using the dummy classifier to classify the dataset and calculating the accuracy and recall score
+- Using the SVC classifier to classify the dataset and calculating the accuracy, recall, and precision score
+- Using the SVC classifier (with tunned parameters) to classify the dataset and calculating the confusion matrix
+- Using the Logistic regression classifier to classify the dataset
+- Analyzing the precision recall and ROC curve
+- Performing a grid search over the defined parameters for a logistic regression and using recall for scoring and the default 3-fold cross validation
+
 

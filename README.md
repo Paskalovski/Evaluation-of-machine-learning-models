@@ -1,9 +1,9 @@
-# Evaluation-of-machine-learning-models
+## Evaluation-of-machine-learning-models
 
 Evaluation of several applied machine learning models for fraud prediction
 
 ### Application content:
-- Data Visualization 
+- Data Visualization  
 - Data Preprocessing
 - Using the dummy classifier to classify the dataset and calculating the accuracy and recall score
 - Using the SVC classifier to classify the dataset and calculating the accuracy, recall, and precision score
